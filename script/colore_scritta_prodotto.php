@@ -30,7 +30,7 @@ add_action('wp_footer', function () {
 		const selectElement = document.querySelector('#pa_colore_scritta');
 
 		document.addEventListener("DOMContentLoaded", function() {
-			if (isProduct) return;
+			if (!isProduct) return;
 			setColor(selectElement.value);
 		});
 
