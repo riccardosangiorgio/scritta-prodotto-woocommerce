@@ -1,9 +1,11 @@
 <?php
+
 /**
  * The following hook will add a input field right before "add variations form"
  * will be used for getting Numero 
  */
-function add_numero_field() {
+function add_numero_field()
+{
     echo '<table class="variations" cellspacing="0" style="margin-bottom: 10px;">
           <tbody>
               <tr>
@@ -16,16 +18,17 @@ function add_numero_field() {
           </tbody>
       </table>';
 }
-add_action( 'woocommerce_before_variations_form', 'add_numero_field' );
+add_action('woocommerce_before_variations_form', 'add_numero_field');
 
-function numero_validation() { 
-    if ( empty( $_REQUEST['numero'] ) ) {
-        wc_add_notice( __( 'Inserire un numero.', 'woocommerce' ), 'error' );
+function numero_validation()
+{
+    if (empty($_REQUEST['numero'])) {
+        wc_add_notice(__('Inserire un numero.', 'woocommerce'), 'error');
         return false;
     }
     return true;
 }
-add_action( 'woocommerce_add_to_cart_validation', 'numero_validation', 10, 3 );
+add_action('woocommerce_add_to_cart_validation', 'numero_validation', 10, 3);
 
 function save_numero_field($cart_item_data, $product_id)
 {
@@ -63,10 +66,11 @@ add_action('woocommerce_add_order_item_meta', 'tshirt_order_meta_handler', 1, 3)
 
 
 // define the woocommerce_cart_item_permalink callback 
-function filter_woocommerce_cart_item_permalink( $product_get_permalink_cart_item, $cart_item, $cart_item_key ) { 
+function filter_woocommerce_cart_item_permalink($product_get_permalink_cart_item, $cart_item, $cart_item_key)
+{
     // make filter magic happen here... 
-    return $product_get_permalink_cart_item . "&number=" . $cart_item['numero']; 
-}; 
-         
+    return $product_get_permalink_cart_item . "&number=" . $cart_item['numero'];
+};
+
 // add the filter 
-add_filter( 'woocommerce_cart_item_permalink', 'filter_woocommerce_cart_item_permalink', 10, 3 ); 
+add_filter('woocommerce_cart_item_permalink', 'filter_woocommerce_cart_item_permalink', 10, 3);

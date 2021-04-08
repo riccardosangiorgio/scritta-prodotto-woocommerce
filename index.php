@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Plugin Name: Scritta Prodotto
  * Description: Gestione della scritta sul prodotto.
@@ -20,7 +21,7 @@
  * along with Scritta Prodotto. If not, see https://www.gnu.org/licenses/gpl.html.
  */
 
- include(plugin_dir_path( __FILE__ ) . 'script/attributi_custom_fields.php');
- include(plugin_dir_path( __FILE__ ) . 'script/colore_scritta_prodotto.php');
- include(plugin_dir_path( __FILE__ ) . 'script/link_prodotto.php');
- include(plugin_dir_path( __FILE__ ) . 'script/numero_product_field.php');
+include(plugin_dir_path(__FILE__) . 'script/attributi_custom_fields.php');
+include(plugin_dir_path(__FILE__) . 'script/colore_scritta_prodotto.php');
+include(plugin_dir_path(__FILE__) . 'script/link_prodotto.php');
+include(plugin_dir_path(__FILE__) . 'script/numero_product_field.php');
