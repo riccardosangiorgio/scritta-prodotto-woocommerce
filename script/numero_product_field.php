@@ -1,8 +1,8 @@
 <?php
 
 /**
- * The following hook will add a input field right before "add variations form"
- * will be used for getting Numero 
+ * Inserisci una textfield contente il numero passato com parametro GET
+ * prima del box "variations" di WooCommerce.
  */
 function add_numero_field()
 {
@@ -20,6 +20,9 @@ function add_numero_field()
 }
 add_action('woocommerce_before_variations_form', 'add_numero_field');
 
+/**
+ * Forza l'inserimento di un numero
+ */
 function numero_validation()
 {
     if (empty($_REQUEST['numero'])) {
@@ -30,6 +33,10 @@ function numero_validation()
 }
 add_action('woocommerce_add_to_cart_validation', 'numero_validation', 10, 3);
 
+/**
+ * Salva i dati (custom fields) quando il prodotto viene aggiunto al carrello.
+ * Ogni configurazione e' univoca grazie a unique_key.
+ */
 function save_numero_field($cart_item_data, $product_id)
 {
     if (isset($_REQUEST['numero'])) {
@@ -41,6 +48,9 @@ function save_numero_field($cart_item_data, $product_id)
 }
 add_action('woocommerce_add_cart_item_data', 'save_numero_field', 10, 2);
 
+/**
+ * Viene visualizzato il numero (custom fields) nel riepilogo dell'ordine.
+ */
 function render_meta_on_cart_and_checkout($cart_data, $cart_item = null)
 {
     $custom_items = array();
@@ -55,7 +65,6 @@ function render_meta_on_cart_and_checkout($cart_data, $cart_item = null)
 }
 add_filter('woocommerce_get_item_data', 'render_meta_on_cart_and_checkout', 10, 2);
 
-
 function tshirt_order_meta_handler($item_id, $values, $cart_item_key)
 {
     if (isset($values['numero'])) {
@@ -64,13 +73,12 @@ function tshirt_order_meta_handler($item_id, $values, $cart_item_key)
 }
 add_action('woocommerce_add_order_item_meta', 'tshirt_order_meta_handler', 1, 3);
 
-
-// define the woocommerce_cart_item_permalink callback 
+/**
+ * Modifica il link dei prodotti aggiunti al carrelo, 
+ * inserendo il parametro number alla fine dell'URL.
+ */
 function filter_woocommerce_cart_item_permalink($product_get_permalink_cart_item, $cart_item, $cart_item_key)
 {
-    // make filter magic happen here... 
     return $product_get_permalink_cart_item . "&number=" . $cart_item['numero'];
 };
-
-// add the filter 
 add_filter('woocommerce_cart_item_permalink', 'filter_woocommerce_cart_item_permalink', 10, 3);

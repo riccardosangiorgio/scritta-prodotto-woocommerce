@@ -15,7 +15,7 @@ add_action('wp_footer', function () {
 
 ?>
 	<script>
-		const colors = JSON.parse('<?php echo json_encode($colors) ?>');
+		const colors = JSON.parse('<?php echo addslashes(json_encode($colors)) ?>');
 		const isProduct = <?php echo is_product() ? "true" : "false" ?>
 
 		function setColor(value) {
