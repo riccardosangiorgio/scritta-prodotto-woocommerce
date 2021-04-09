@@ -3,5 +3,5 @@ add_shortcode('link_prodotto', function ($atts) {
 	$a = shortcode_atts(array(
 		'nome_prodotto' => 'nome_prodotto',
 	), $atts);
-	return get_site_url() . "/" . $a['nome_prodotto']  . "/?number=" . $_GET['number'];
+	return get_site_url() . "\/prodotto/" . $a['nome_prodotto']  . "/?number=" . $_GET['number'];
 });
